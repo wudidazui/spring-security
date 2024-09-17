@@ -54,6 +54,4 @@ public class LoginServiceImpl implements LoginService {
         redisCache.deleteObject("login:"+userid);
         return new ResponseResult(200,"注销成功");
     }
-
-    ;
 }
