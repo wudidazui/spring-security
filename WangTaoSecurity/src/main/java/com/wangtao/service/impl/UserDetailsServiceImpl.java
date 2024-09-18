@@ -3,6 +3,7 @@ package com.wangtao.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wangtao.domain.LoginUser;
 import com.wangtao.domain.User;
+import com.wangtao.mapper.MenuMapper;
 import com.wangtao.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,18 +25,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private MenuMapper menuMapper;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //查询用户信息
-        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(User::getUserName,username);
-        User user = userMapper.selectOne(queryWrapper);
+        LambdaQueryWrapper wrapper = new LambdaQueryWrapper<User>().eq(User::getUserName, username);
+        User user = userMapper.selectOne(wrapper);
         if(Objects.isNull(user)){
             throw new RuntimeException("用户名或者密码错误");
         }
-        List<String> list = new ArrayList<>(Arrays.asList("test","admin"));
+
+        List<String> list = menuMapper.selectPermsByUserId(user.getId());
+
         return new LoginUser(user,list);
-        //权限信息
-//        returnturn null;
+
     }
 }

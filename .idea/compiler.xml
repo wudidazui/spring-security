@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <excludeFromCompile>
       <directory url="file://$PROJECT_DIR$/WangTaoSecurity/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/SecurityDemo/src/main/resources/archetype-resources" includeSubdirectories="true" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
@@ -11,12 +12,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="SecurityQuickStart" />
         <module name="WangTaoSecurity" />
+        <module name="SecurityDemo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="21" />
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="SecurityDemo" options="-parameters" />
       <module name="SecurityQuickStart" options="-parameters" />
       <module name="WangTaoSecurity" options="-parameters" />
     </option>

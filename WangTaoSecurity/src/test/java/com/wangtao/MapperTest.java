@@ -1,6 +1,8 @@
 package com.wangtao;
 
+import com.wangtao.domain.Menu;
 import com.wangtao.domain.User;
+import com.wangtao.mapper.MenuMapper;
 import com.wangtao.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class MapperTest {
     private UserMapper userMapper;
 
     @Autowired
+    private MenuMapper menuMapper;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Test
@@ -28,6 +33,11 @@ public class MapperTest {
         System.out.println(users);
     }
 
+    @Test
+    public void testUserMapper1(){
+        List<String> list = menuMapper.selectPermsByUserId(1L);
+        System.out.println(list);
+    }
 
     @Test
     public void TestPasswordEncoder(){
